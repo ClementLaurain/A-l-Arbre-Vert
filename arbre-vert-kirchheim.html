@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>À l'Arbre Vert — Restaurant traditionnel à Kirchheim</title>
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA2NCA2NCc+PGNpcmNsZSBjeD0nMzInIGN5PScyMicgcj0nMTYnIGZpbGw9JyM0YTdhMmUnLz48cGF0aCBkPSdNMjQgMzhjMCAwIDYtOCA4LThzOCA4IDggOCA4IDIgOCA4LTggMTAtMTYgMTAtMTYtNC0xNi0xMCA4LTggOC04eicgZmlsbD0nIzJkNGExZScvPjxyZWN0IHg9JzI4JyB5PSczOCcgd2lkdGg9JzgnIGhlaWdodD0nMTYnIGZpbGw9JyM4YjVlM2MnIHJ4PScyJy8+PC9zdmc+" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --vert: #2d4a1e;
+    --vert-clair: #4a7a2e;
+    --vert-pale: #e8f0e0;
+    --bois: #8b5e3c;
+    --bois-clair: #c8956a;
+    --creme: #f7f2e8;
+    --creme-fonce: #ede5d0;
+    --or: #c9a227;
+    --or-pale: #f0d87a;
+    --texte: #2a1f0e;
+    --texte-muted: #5a4a35;
+    --rouge-alsace: #8b1a1a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Crimson Pro', Georgia, serif;
+    background: var(--creme);
+    color: var(--texte);
+    overflow-x: hidden;
+  }
+
+  /* ─── TEXTURE DE FOND ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M0 60L60 0' stroke='%23c8a96a' stroke-width='0.3' opacity='0.15'/%3E%3Cpath d='M-10 50L50 -10' stroke='%23c8a96a' stroke-width='0.3' opacity='0.1'/%3E%3Cpath d='M10 70L70 10' stroke='%23c8a96a' stroke-width='0.3' opacity='0.1'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── NAVIGATION ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(45, 74, 30, 0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 2px solid var(--or);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--or-pale);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-logo .logo-icon {
+    width: 28px;
+    height: 28px;
+    display: block;
+    object-fit: contain;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 0;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(247, 242, 232, 0.85);
+    text-decoration: none;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 50%; right: 50%;
+    height: 1px;
+    background: var(--or);
+    transition: left 0.3s, right 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--or-pale); }
+  .nav-links a:hover::after { left: 1rem; right: 1rem; }
+
+  .nav-tel {
+    font-family: 'Crimson Pro', serif;
+    color: var(--or-pale);
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: 1px solid var(--or);
+    padding: 0.35rem 0.9rem;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+
+  .nav-tel:hover { background: var(--or); color: var(--vert); }
+
+  /* ─── HERO ─── */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background:
+      linear-gradient(160deg, rgba(45,74,30,0.92) 0%, rgba(20,35,12,0.88) 50%, rgba(139,94,60,0.82) 100%),
+      url('https://primary.jwwb.nl/public/z/q/g/temp-klxabgjoewetqryzanyw/20241027_122410-high.jpg') center/cover no-repeat;
+  }
+
+  .hero-ornament {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='1' fill='%23c9a227' opacity='0.2'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .hero-frame {
+    position: absolute;
+    top: 90px; left: 40px; right: 40px; bottom: 40px;
+    border: 1px solid rgba(201, 162, 39, 0.3);
+    pointer-events: none;
+  }
+
+  .hero-frame::before {
+    content: '';
+    position: absolute;
+    top: 8px; left: 8px; right: 8px; bottom: 8px;
+    border: 1px solid rgba(201, 162, 39, 0.15);
+  }
+
+  .hero-content {
+    position: relative;
+    text-align: center;
+    padding: 2rem;
+    z-index: 2;
+    animation: fadeUp 1.2s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-sup {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 700;
+    color: var(--creme);
+    line-height: 1.05;
+    margin-bottom: 0.4rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--or-pale);
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .hero-divider span { width: 60px; height: 1px; background: var(--or); display: block; }
+  .hero-divider .diamond {
+    width: 8px; height: 8px;
+    background: var(--or);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .hero-sub {
+    font-family: 'IM Fell English', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: rgba(247, 242, 232, 0.8);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.85rem 2.2rem;
+    background: var(--or);
+    color: var(--vert);
+    font-weight: 600;
+    border: 2px solid var(--or);
+    transition: all 0.25s;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--or-pale);
+  }
+
+  .btn-outline {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.85rem 2.2rem;
+    background: transparent;
+    color: var(--creme);
+    border: 2px solid rgba(247, 242, 232, 0.5);
+    transition: all 0.25s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--creme);
+    background: rgba(247, 242, 232, 0.1);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    color: rgba(201, 162, 39, 0.7);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+    z-index: 2;
+  }
+
+  .hero-scroll::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--or), transparent);
+    display: block;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ─── SECTIONS GÉNÉRALES ─── */
+  section { position: relative; z-index: 1; }
+
+  .section-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-tag {
+    font-size: 0.78rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--bois-clair);
+    display: block;
+    margin-bottom: 0.8rem;
+    font-family: 'Crimson Pro', serif;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 600;
+    color: var(--vert);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--bois); }
+
+  .section-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin: 1rem 0;
+  }
+
+  .section-rule span { width: 40px; height: 1px; background: var(--or); display: block; }
+  .section-rule .r-diamond {
+    width: 6px; height: 6px;
+    background: var(--or);
+    transform: rotate(45deg);
+  }
+
+  /* ─── BANNIÈRE INFOS ─── */
+  #infos-bar {
+    background: var(--vert);
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    border-bottom: 2px solid var(--or);
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--creme);
+    font-size: 0.9rem;
+  }
+
+  .info-item .icon {
+    color: var(--or);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .info-item strong {
+    color: var(--or-pale);
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.1rem;
+  }
+
+  /* ─── SECTION BIENVENUE ─── */
+  #bienvenue {
+    padding: 6rem 0 5rem;
+    background: var(--creme);
+  }
+
+  .bienvenue-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .bienvenue-text p {
+    font-size: 1.15rem;
+    line-height: 1.85;
+    color: var(--texte-muted);
+    margin-bottom: 1.2rem;
+    font-family: 'Crimson Pro', serif;
+  }
+
+  .bienvenue-text blockquote {
+    border-left: 3px solid var(--or);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    background: var(--creme-fonce);
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--bois);
+    line-height: 1.6;
+  }
+
+  .bienvenue-img-wrap {
+    position: relative;
+  }
+
+  .bienvenue-img-wrap img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    display: block;
+    filter: sepia(10%) contrast(1.05);
+  }
+
+  .bienvenue-img-wrap::before {
+    content: '';
+    position: absolute;
+    top: -16px; left: -16px; right: 16px; bottom: 16px;
+    border: 2px solid var(--or);
+    z-index: -1;
+    opacity: 0.5;
+  }
+
+  .bienvenue-img-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: -16px; right: -16px; left: 16px; top: 16px;
+    border: 1px solid var(--bois-clair);
+    z-index: -1;
+    opacity: 0.3;
+  }
+
+  /* ─── SERVICES ─── */
+  #services {
+    padding: 5rem 0;
+    background: var(--vert);
+    overflow: hidden;
+  }
+
+  #services .section-title { color: var(--or-pale); }
+  #services .section-tag { color: rgba(201, 162, 39, 0.7); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .service-card {
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+  }
+
+  .service-card img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+    filter: brightness(0.7) sepia(20%);
+  }
+
+  .service-card:hover img { transform: scale(1.06); filter: brightness(0.65) sepia(15%); }
+
+  .service-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(20,35,12,0.95) 0%, transparent 100%);
+    padding: 2rem 1.8rem 1.8rem;
+    transform: translateY(1.5rem);
+    transition: transform 0.4s ease;
+  }
+
+  .service-card:hover .service-overlay { transform: translateY(0); }
+
+  .service-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: rgba(201, 162, 39, 0.25);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .service-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--creme);
+    margin-bottom: 0.6rem;
+  }
+
+  .service-desc {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.95rem;
+    color: rgba(247, 242, 232, 0.75);
+    line-height: 1.6;
+    opacity: 0;
+    transition: opacity 0.4s ease 0.1s;
+  }
+
+  .service-card:hover .service-desc { opacity: 1; }
+
+  /* ─── HORAIRES ─── */
+  #horaires {
+    padding: 5rem 0;
+    background: var(--creme-fonce);
+  }
+
+  .horaires-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .horaires-card {
+    background: var(--creme);
+    border: 1px solid rgba(201, 162, 39, 0.3);
+    padding: 2.5rem;
+    position: relative;
+  }
+
+  .horaires-card::before {
+    content: '';
+    position: absolute;
+    top: 8px; left: 8px; right: -8px; bottom: -8px;
+    background: var(--vert);
+    z-index: -1;
+    opacity: 0.08;
+  }
+
+  .horaires-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--vert);
+    margin-bottom: 0.4rem;
+  }
+
+  .horaires-subtitle {
+    font-size: 0.85rem;
+    color: var(--bois-clair);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.8rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--creme-fonce);
+    display: block;
+  }
+
+  .horaires-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.6rem 0;
+    border-bottom: 1px dotted rgba(139, 94, 60, 0.2);
+    font-size: 1rem;
+  }
+
+  .horaires-row .jour {
+    font-family: 'Crimson Pro', serif;
+    font-weight: 600;
+    color: var(--texte);
+  }
+
+  .horaires-row .heure {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.95rem;
+    color: var(--texte-muted);
+  }
+
+  .horaires-row .ferme {
+    color: var(--rouge-alsace);
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  .horaires-note {
+    margin-top: 1.2rem;
+    font-size: 0.9rem;
+    color: var(--texte-muted);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  .reservation-card {
+    background: var(--vert);
+    padding: 2.5rem;
+    color: var(--creme);
+    position: relative;
+  }
+
+  .reservation-card::after {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(201, 162, 39, 0.2);
+    pointer-events: none;
+  }
+
+  .reservation-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--or-pale);
+    margin-bottom: 1.2rem;
+    line-height: 1.3;
+  }
+
+  .reservation-card p {
+    font-size: 1.05rem;
+    color: rgba(247, 242, 232, 0.8);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+    font-family: 'Crimson Pro', serif;
+  }
+
+  .tel-big {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--or);
+    text-decoration: none;
+    margin: 1.5rem 0;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+
+  .tel-big:hover { color: var(--or-pale); }
+
+  .resa-types {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-top: 1.5rem;
+  }
+
+  .resa-type {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 0.95rem;
+    color: rgba(247, 242, 232, 0.8);
+  }
+
+  .resa-type .dot {
+    width: 6px; height: 6px;
+    background: var(--or);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ─── MENU / CARTE ─── */
+  #carte {
+    padding: 5rem 0;
+    background: var(--creme);
+  }
+
+  .carte-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .carte-block {
+    background: var(--creme-fonce);
+    border: 1px solid rgba(201, 162, 39, 0.25);
+    padding: 2rem;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .carte-block:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(45, 74, 30, 0.1);
+  }
+
+  .carte-block-icon {
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+    display: inline-block;
+    color: var(--or);
+    background: rgba(201, 162, 39, 0.12);
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.45rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .carte-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--vert);
+    margin-bottom: 0.5rem;
+  }
+
+  .carte-block p {
+    font-size: 1rem;
+    color: var(--texte-muted);
+    line-height: 1.7;
+    font-family: 'Crimson Pro', serif;
+  }
+
+  .carte-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--vert);
+    color: var(--or-pale);
+    padding: 0.25rem 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .carte-imgs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .carte-imgs img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    filter: sepia(8%) contrast(1.05);
+    transition: filter 0.3s;
+  }
+
+  .carte-imgs img:hover { filter: sepia(0%) contrast(1.1); }
+
+  /* ─── TÉMOIGNAGE ─── */
+  #temoignage {
+    padding: 5rem 0;
+    background: var(--vert);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #temoignage::before {
+    content: '❝';
+    position: absolute;
+    top: -0.5rem; left: 50%;
+    transform: translateX(-50%);
+    font-size: 15rem;
+    color: rgba(201, 162, 39, 0.06);
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .temoignage-text {
+    font-family: 'IM Fell English', serif;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    font-style: italic;
+    color: var(--creme);
+    line-height: 1.65;
+    max-width: 720px;
+    margin: 0 auto 2rem;
+  }
+
+  .temoignage-author {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--or);
+  }
+
+  /* ─── GALERIE ─── */
+  #galerie {
+    padding: 5rem 0;
+    background: var(--creme-fonce);
+  }
+
+  .galerie-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 250px 250px;
+    gap: 6px;
+    margin-top: 3rem;
+  }
+
+  .galerie-grid .g-item { overflow: hidden; }
+  .galerie-grid .g-item:first-child { grid-row: span 2; }
+
+  .galerie-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: sepia(12%) saturate(0.9);
+    transition: transform 0.5s ease, filter 0.4s ease;
+  }
+
+  .galerie-grid img:hover { transform: scale(1.05); filter: sepia(0%) saturate(1.1); }
+
+  /* ─── ÉVÉNEMENTS ─── */
+  #evenements {
+    padding: 5rem 0;
+    background: var(--creme);
+  }
+
+  .event-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .event-card {
+    border: 1px solid rgba(201, 162, 39, 0.3);
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    background: var(--creme);
+    transition: border-color 0.2s;
+  }
+
+  .event-card:hover { border-color: var(--or); }
+
+  .event-icon-wrap {
+    min-width: 52px;
+    background: var(--vert);
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.85rem;
+    color: var(--or);
+    padding: 0.75rem 0.9rem;
+    border-radius: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .event-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--vert);
+    margin-bottom: 0.5rem;
+  }
+
+  .event-card p {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.97rem;
+    color: var(--texte-muted);
+    line-height: 1.65;
+  }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    padding: 5rem 0;
+    background: var(--vert);
+  }
+
+  #contact .section-title { color: var(--or-pale); }
+  #contact .section-tag { color: rgba(201, 162, 39, 0.7); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-info {
+    color: var(--creme);
+  }
+
+  .contact-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(201, 162, 39, 0.15);
+  }
+
+  .contact-item:last-of-type { border-bottom: none; margin-bottom: 0; }
+
+  .c-icon {
+    min-width: 44px;
+    background: rgba(201, 162, 39, 0.15);
+    border: 1px solid rgba(201, 162, 39, 0.3);
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.85rem;
+    color: var(--or);
+    padding: 0.65rem 0.8rem;
+    border-radius: 0.5rem;
+  }
+
+  .contact-item h4 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 0.4rem;
+  }
+
+  .contact-item p, .contact-item a {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    color: rgba(247, 242, 232, 0.85);
+    line-height: 1.65;
+    text-decoration: none;
+  }
+
+  .contact-item a:hover { color: var(--or-pale); }
+
+  .map-frame {
+    width: 100%;
+    height: 400px;
+    border: 2px solid rgba(201, 162, 39, 0.3);
+    filter: sepia(30%) contrast(0.9);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #0e1a09;
+    padding: 3rem 2rem 1.5rem;
+    border-top: 2px solid var(--or);
+  }
+
+  .footer-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .footer-brand .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--or-pale);
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-brand p {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.95rem;
+    color: rgba(247, 242, 232, 0.55);
+    line-height: 1.7;
+  }
+
+  .footer-col h4 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li {
+    margin-bottom: 0.5rem;
+  }
+  .footer-col ul li a {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.95rem;
+    color: rgba(247, 242, 232, 0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--or-pale); }
+
+  .footer-col p {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.95rem;
+    color: rgba(247, 242, 232, 0.55);
+    line-height: 1.8;
+  }
+
+  .footer-bottom {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(201, 162, 39, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.85rem;
+    color: rgba(247, 242, 232, 0.35);
+  }
+
+  .footer-bottom a {
+    color: rgba(201, 162, 39, 0.5);
+    text-decoration: none;
+  }
+
+  .fb-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(247, 242, 232, 0.55) !important;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: 1px solid rgba(201, 162, 39, 0.2);
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .fb-link:hover {
+    border-color: rgba(201, 162, 39, 0.5);
+    color: var(--or-pale) !important;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .bienvenue-grid,
+    .horaires-wrap,
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card img { height: 260px; }
+    .carte-grid { grid-template-columns: 1fr; }
+    .event-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .galerie-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: unset;
+    }
+    .galerie-grid .g-item:first-child { grid-row: span 1; }
+    .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+
+  /* ─── TRANSITIONS AU SCROLL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA2NCA2NCc+PGNpcmNsZSBjeD0nMzInIGN5PScyMicgcj0nMTYnIGZpbGw9JyM0YTdhMmUnLz48cGF0aCBkPSdNMjQgMzhjMCAwIDYtOCA4LThzOCA4IDggOCA4IDIgOCA4LTggMTAtMTYgMTAtMTYtNC0xNi0xMCA4LTggOC04eicgZmlsbD0nIzJkNGExZScvPjxyZWN0IHg9JzI4JyB5PSczOCcgd2lkdGg9JzgnIGhlaWdodD0nMTYnIGZpbGw9JyM4YjVlM2MnIHJ4PScyJy8+PC9zdmc+" alt="Logo À l'Arbre Vert" class="logo-icon">
+    À l'Arbre Vert
+  </a>
+  <ul class="nav-links">
+    <li><a href="#bienvenue">Accueil</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#carte">Menu</a></li>
+    <li><a href="#horaires">Horaires</a></li>
+    <li><a href="#galerie">Galerie</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:+33388875100" class="nav-tel">03.88.87.51.00</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-ornament"></div>
+  <div class="hero-frame"></div>
+  <div class="hero-content">
+    <span class="hero-sup">Restaurant traditionnel à Kirchheim</span>
+    <h1 class="hero-title">À l'<em>Arbre Vert</em></h1>
+    <div class="hero-divider">
+      <span></span>
+      <div class="diamond"></div>
+      <span></span>
+    </div>
+    <p class="hero-sub">Cuisine familiale alsacienne, saveurs authentiques et ambiance conviviale.</p>
+    <div class="hero-btns">
+      <a href="#carte" class="btn-primary">Découvrir le menu</a>
+      <a href="tel:+33388875100" class="btn-outline">Réserver une table</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Découvrir</div>
+</section>
+
+<!-- BARRE INFOS -->
+<div id="infos-bar">
+  <div class="info-item">
+    <span class="icon">Adr.</span>
+    <div>
+      <strong>Adresse</strong>
+      Kirchheim, Alsace
+    </div>
+  </div>
+  <div class="info-item">
+    <span class="icon">Tel</span>
+    <div>
+      <strong>Réservation</strong>
+      03.88.87.51.00
+    </div>
+  </div>
+  <div class="info-item">
+    <span class="icon">Midi</span>
+    <div>
+      <strong>Midi</strong>
+      11h30 – 13h30
+    </div>
+  </div>
+  <div class="info-item">
+    <span class="icon">Soir</span>
+    <div>
+      <strong>Soir</strong>
+      18h30 – 21h00
+    </div>
+  </div>
+  <div class="info-item">
+    <span class="icon">Ouvert</span>
+    <div>
+      <strong>Ouvert</strong>
+      Lun · Jeu · Ven · Sam soir · Dim
+    </div>
+  </div>
+</div>
+
+<!-- BIENVENUE -->
+<section id="bienvenue">
+  <div class="section-inner">
+    <div class="bienvenue-grid">
+      <div class="bienvenue-text reveal">
+        <span class="section-tag">Notre maison</span>
+        <h2 class="section-title">Bienvenue à<br><em>l'Arbre Vert Kirchheim</em></h2>
+        <div class="section-rule">
+          <span></span><div class="r-diamond"></div><span></span>
+        </div>
+        <p>
+          Dans notre petite auberge de Kirchheim, nous vous accueillons comme à la maison. Notre équipe est familiale, et nous choisissons nos produits chaque semaine auprès de producteurs locaux.
+        </p>
+        <blockquote>
+          "Une adresse simple et authentique, où les plats sont cuisinés avec soin et servis avec le sourire."
+        </blockquote>
+        <p>
+          Venez partager un repas convivial et découvrir des recettes alsaciennes sincères, préparées avec des ingrédients frais et autant de cœur.
+        </p>
+        <a href="tel:+33388875100" class="btn-primary" style="margin-top:1.5rem; display:inline-block;">Nous contacter</a>
+      </div>
+      <div class="bienvenue-img-wrap reveal" style="transition-delay:0.2s">
+        <img
+          src="https://primary.jwwb.nl/public/z/q/g/temp-klxabgjoewetqryzanyw/img-20240601-wa0004-standard.jpg"
+          alt="Intérieur du restaurant Arbre Vert"
+          onerror="this.src='https://primary.jwwb.nl/public/z/q/g/temp-klxabgjoewetqryzanyw/20241027_122410-high.jpg'"
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">Ce que nous aimons partager</span>
+      <h2 class="section-title" style="color:var(--or-pale);">Nos <em>Services</em></h2>
+      <div class="section-rule">
+        <span style="background:var(--or)"></span><div class="r-diamond"></div><span style="background:var(--or)"></span>
+      </div>
+    </div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <img
+        src="https://primary.jwwb.nl/public/z/q/g/temp-klxabgjoewetqryzanyw/20241027_122410-high.jpg"
+        alt="Plat du jour et menu maison"
+      >
+      <div class="service-overlay">
+        <div class="service-num">01</div>
+        <div class="service-title">Plat du jour & Carte</div>
+        <p class="service-desc">Chaque midi, nous proposons un plat du jour mijoté avec des produits locaux, ainsi qu'une carte simple, généreuse et de saison.</p>
+      </div>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.15s">
+      <img
+        src="https://primary.jwwb.nl/public/z/q/g/temp-klxabgjoewetqryzanyw/img_20210610_200227-high.jpg"
+        alt="Tartes flambées et pizzas maison"
+        onerror="this.src='https://primary.jwwb.nl/public/z/q/g/temp-klxabgjoewetqryzanyw/pizza-et-tarte-flamb-e_20251101_154105_0000-standard.png'"
+      >
+      <div class="service-overlay">
+        <div class="service-num">02</div>
+        <div class="service-title">Tartes flambées & Pizzas</div>
+        <p class="service-desc">Le soir, notre four au feu de bois révèle des tartes flambées et pizzas maison, à déguster sur place ou à emporter.</p>
+      </div>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.3s">
+      <img
+        src="https://primary.jwwb.nl/public/z/q/g/temp-klxabgjoewetqryzanyw/20241013_131647-high.jpg"
+        alt="Petits événements dans une ambiance chaleureuse"
+      >
+      <div class="service-overlay">
+        <div class="service-num">03</div>
+        <div class="service-title">Repas de groupe</div>
+        <p class="service-desc">Anniversaires, repas de famille et petits groupes : nous accueillons vos moments avec une cuisine simple et une attention personnelle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HORAIRES -->
+<section id="horaires">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">Quand nous retrouver</span>
+      <h2 class="section-title">Horaires <em>d'ouverture</em></h2>
+      <div class="section-rule"><span></span><div class="r-diamond"></div><span></span></div>
+    </div>
+    <div class="horaires-wrap">
+      <div class="horaires-card reveal">
+        <h3>Planning de la semaine</h3>
+        <span class="horaires-subtitle">Midi 11h30–13h30 · Soir 18h30–21h00</span>
+
+        <div class="horaires-row">
+          <span class="jour">Lundi</span>
+          <span class="heure">Midi &amp; Soir</span>
+        </div>
+        <div class="horaires-row">
+          <span class="jour">Mardi</span>
+          <span class="ferme">Fermé</span>
+        </div>
+        <div class="horaires-row">
+          <span class="jour">Mercredi</span>
+          <span class="ferme">Fermé</span>
+        </div>
+        <div class="horaires-row">
+          <span class="jour">Jeudi</span>
+          <span class="heure">Midi &amp; Soir</span>
+        </div>
+        <div class="horaires-row">
+          <span class="jour">Vendredi</span>
+          <span class="heure">Midi &amp; Soir</span>
+        </div>
+        <div class="horaires-row">
+          <span class="jour">Samedi</span>
+          <span class="heure">Soir uniquement</span>
+        </div>
+        <div class="horaires-row">
+          <span class="jour">Dimanche</span>
+          <span class="heure">Midi &amp; Soir</span>
+        </div>
+
+        <p class="horaires-note">
+          ✦ Tartes flambées &amp; pizzas uniquement en soirée<br>
+          ✦ Tartes flambées à emporter disponibles le soir
+        </p>
+      </div>
+
+      <div class="reservation-card reveal" style="transition-delay:0.2s">
+        <h3>Réservez votre table ou organisez votre événement</h3>
+        <p>Pour toute réservation, commande à emporter ou organisation d'un événement privé, n'hésitez pas à nous contacter directement par téléphone.</p>
+        <a href="tel:+33388875100" class="tel-big">03.88.87.51.00</a>
+        <div class="resa-types">
+          <div class="resa-type"><span class="dot"></span>Table pour midi ou soir</div>
+          <div class="resa-type"><span class="dot"></span>Commande à emporter</div>
+          <div class="resa-type"><span class="dot"></span>Événement privé sur demande</div>
+          <div class="resa-type"><span class="dot"></span>Anniversaire, repas de groupe</div>
+        </div>
+        <a href="tel:+33388875100" class="btn-primary" style="margin-top:2rem; display:inline-block;">Appeler maintenant</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU / CARTE -->
+<section id="carte">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">À table !</span>
+      <h2 class="section-title">Notre <em>Menu</em></h2>
+      <div class="section-rule"><span></span><div class="r-diamond"></div><span></span></div>
+      <p class="section-copy">
+        Cuisine traditionnelle alsacienne, plats du jour et suggestions du chef. Menu à la carte selon les arrivages et les saisons. Cliquez sur une image pour l'agrandir.
+      </p>
+    </div>
+
+    <div class="menu-grid">
+      <article class="reveal menu-card" style="transition-delay:0s">
+        <figure class="menu-figure">
+          <img src="menu-vrai.png" alt="Menu complet de l'Arbre Vert" class="menu-img">
+          <figcaption class="menu-label">Menu complet</figcaption>
+        </figure>
+        <p class="menu-copy">Plats du jour, menu à la carte, charcuteries et spécialités alsaciennes.</p>
+      </article>
+
+      <article class="reveal menu-card" style="transition-delay:0.1s">
+        <figure class="menu-figure">
+          <img src="menu-desserts.png" alt="Carte des desserts - Page 1" class="menu-img">
+          <figcaption class="menu-label">Desserts - page 1</figcaption>
+        </figure>
+        <p class="menu-copy">Gourmandises maison, tartes, mousses et douceurs du moment.</p>
+      </article>
+
+      <article class="reveal menu-card" style="transition-delay:0.2s">
+        <figure class="menu-figure">
+          <img src="menu-desserts-2.png" alt="Carte des desserts - Page 2" class="menu-img">
+          <figcaption class="menu-label">Desserts - page 2</figcaption>
+        </figure>
+        <p class="menu-copy">Pâtisseries et desserts maison, parfaits pour terminer sur une note sucrée.</p>
+      </article>
+
+      <article class="reveal menu-card" style="transition-delay:0.3s">
+        <figure class="menu-figure">
+          <img src="menu-desserts-3.png" alt="Carte des desserts - Page 3" class="menu-img">
+          <figcaption class="menu-label">Desserts - page 3</figcaption>
+        </figure>
+        <p class="menu-copy">Découvrez toutes les douceurs de saison préparées par notre chef.</p>
+      </article>
+
+      <article class="reveal menu-card" style="transition-delay:0.4s">
+        <figure class="menu-figure">
+          <img src="menu-pizzas.png" alt="Tartes flambées et pizzas" class="menu-img">
+          <figcaption class="menu-label">Tartes & Pizzas</figcaption>
+        </figure>
+        <p class="menu-copy">Tartes flambées et pizzas maison cuites au feu de bois, à déguster sur place ou à emporter.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX MODAL -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <div class="lightbox-content">
+    <button id="lightbox-close" type="button" class="lightbox-close" aria-label="Fermer la vue agrandie">✕</button>
+    <img id="lightbox-img" src="" alt="Aperçu agrandi du menu" class="lightbox-img">
+  </div>
+</div>
+
+<style>
+  #carte {
+    background: linear-gradient(180deg, rgba(247,242,232,1) 0%, rgba(233,239,226,1) 100%);
+    padding-bottom: 4rem;
+  }
+
+  .section-copy {
+    margin-top: 1rem;
+    font-size: 1.05rem;
+    color: var(--texte-muted);
+    font-family: 'Crimson Pro', serif;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.75;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.75rem;
+    margin-top: 3rem;
+  }
+
+  .menu-card {
+    background: rgba(255,255,255,0.96);
+    border: 1px solid rgba(45, 74, 30, 0.12);
+    border-radius: 26px;
+    padding: 1.4rem;
+    box-shadow: 0 20px 45px rgba(45, 74, 30, 0.08);
+    backdrop-filter: blur(12px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .menu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 28px 70px rgba(45, 74, 30, 0.14);
+  }
+
+  .menu-figure {
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 22px;
+    border: 1px solid rgba(45, 74, 30, 0.08);
+  }
+
+  .menu-figure::after {
+    content: 'Voir en grand';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 1rem;
+    color: rgba(247, 242, 232, 0.95);
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(45,74,30,0.6) 100%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  .menu-figure:hover::after {
+    opacity: 1;
+  }
+
+  .menu-img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform 0.35s ease, filter 0.35s ease;
+    cursor: zoom-in;
+  }
+
+  .menu-img:hover {
+    transform: scale(1.05);
+    filter: saturate(1.08);
+  }
+
+  .menu-label {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(45, 74, 30, 0.78);
+    color: #f7f2e8;
+    padding: 0.95rem 1rem;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    backdrop-filter: blur(6px);
+  }
+
+  .menu-copy {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--texte-muted);
+    font-family: 'Crimson Pro', serif;
+    flex-grow: 1;
+  }
+
+  .menu-copy::before {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 40px;
+    background: rgba(201, 162, 39, 0.25);
+    margin-bottom: 1rem;
+  }
+
+  .lightbox {
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 14, 6, 0.94);
+    z-index: 1200;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    backdrop-filter: blur(6px);
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+  }
+
+  .lightbox.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox-content {
+    position: relative;
+    width: min(96vw, 1100px);
+    max-height: 92vh;
+    padding: 0.75rem;
+  }
+
+  .lightbox-img {
+    width: 100%;
+    max-height: 92vh;
+    object-fit: contain;
+    border-radius: 24px;
+    box-shadow: 0 28px 90px rgba(0, 0, 0, 0.35);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--or);
+    color: var(--vert);
+    font-size: 1.25rem;
+    cursor: pointer;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .lightbox-close:hover {
+    transform: scale(1.05);
+    background: rgba(201, 162, 39, 0.95);
+  }
+
+  @media (max-width: 900px) {
+    .menu-grid {
+      gap: 1.2rem;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .menu-card {
+      padding: 1rem;
+    }
+
+    .menu-label {
+      font-size: 0.85rem;
+    }
+  }
+</style>
+
+<script>
+const lightbox = document.getElementById('lightbox');
+const lightboxImage = document.getElementById('lightbox-img');
+const closeLightbox = document.getElementById('lightbox-close');
+
+function openLightbox(src) {
+  lightboxImage.src = src;
+  lightbox.classList.add('active');
+  lightbox.setAttribute('aria-hidden', 'false');
+}
+
+function closeLightboxFn() {
+  lightbox.classList.remove('active');
+  lightbox.setAttribute('aria-hidden', 'true');
+  lightboxImage.src = '';
+}
+
+document.querySelectorAll('.menu-img').forEach(img => {
+  img.addEventListener('click', () => openLightbox(img.src));
+});
+
+closeLightbox.addEventListener('click', closeLightboxFn);
+lightbox.addEventListener('click', e => {
+  if (e.target === lightbox) closeLightboxFn();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightboxFn();
+});
+</script>
+
+<!-- TÉMOIGNAGE -->
+<section id="temoignage">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="temoignage-text">
+        "Lieu chaleureux, service discret et plats qui ont du goût. Un vrai bon moment en famille, à revenir sans hésiter."
+      </p>
+      <div class="section-rule" style="justify-content:center; margin-bottom:1rem;">
+        <span style="background:var(--or)"></span><div class="r-diamond" style="background:var(--or)"></div><span style="background:var(--or)"></span>
+      </div>
+      <p class="temoignage-author">— Sophie et Marc, clients réguliers</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIE -->
+<section id="galerie">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">Nos moments</span>
+      <h2 class="section-title">La <em>Galerie</em></h2>
+      <div class="section-rule"><span></span><div class="r-diamond"></div><span></span></div>
+    </div>
+    <div class="galerie-grid">
+      <div class="g-item">
+        <img src="https://primary.jwwb.nl/public/z/q/g/temp-klxabgjoewetqryzanyw/img-20240601-wa0003-standard.jpg" alt="Restaurant Arbre Vert">
+      </div>
+      <div class="g-item">
+        <img src="https://primary.jwwb.nl/public/z/q/g/temp-klxabgjoewetqryzanyw/20241013_131647-high.jpg" alt="Événement au restaurant">
+      </div>
+      <div class="g-item">
+        <img src="https://primary.jwwb.nl/public/z/q/g/temp-klxabgjoewetqryzanyw/img_20210610_200227-high.jpg" alt="Salle du restaurant">
+      </div>
+      <div class="g-item">
+        <img src="https://primary.jwwb.nl/public/z/q/g/temp-klxabgjoewetqryzanyw/20241027_122410-high.jpg" alt="Plats maison">
+      </div>
+      <div class="g-item">
+        <img src="https://primary.jwwb.nl/public/z/q/g/temp-klxabgjoewetqryzanyw/pizza-et-tarte-flamb-e_20251101_154105_0000-standard.png" alt="Tartes flambées">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÉVÉNEMENTS -->
+<section id="evenements">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">Des occasions mémorables</span>
+      <h2 class="section-title">Événements <em>Spéciaux</em></h2>
+      <div class="section-rule"><span></span><div class="r-diamond"></div><span></span></div>
+    </div>
+    <div class="event-grid">
+      <div class="event-card reveal">
+        <div class="event-icon-wrap">Privé</div>
+        <div>
+          <h3>Événements privés</h3>
+          <p>Anniversaires, repas de famille, fêtes entre amis… réservez notre espace pour votre événement privé. Nous adaptons les menus selon vos souhaits et votre budget.</p>
+        </div>
+      </div>
+      <div class="event-card reveal" style="transition-delay:0.15s">
+        <div class="event-icon-wrap">Pro</div>
+        <div>
+          <h3>Repas d'entreprise</h3>
+          <p>Déjeuners d'affaires, team-buildings, séminaires… profitez d'un cadre authentique pour vos réunions professionnelles avec une cuisine soignée.</p>
+        </div>
+      </div>
+      <div class="event-card reveal" style="transition-delay:0.3s">
+        <div class="event-icon-wrap">Fêtes</div>
+        <div>
+          <h3>Fêtes de fin d'année</h3>
+          <p>Réveillons, repas de Noël, fêtes de fin d'année… laissez-nous organiser votre soirée dans la pure tradition alsacienne, avec décoration et menu spécial.</p>
+        </div>
+      </div>
+      <div class="event-card reveal" style="transition-delay:0.45s">
+        <div class="event-icon-wrap">Info</div>
+        <div>
+          <h3>Renseignements & Devis</h3>
+          <p>Pour toute demande d'événement spécial, contactez-nous directement par téléphone au <strong>03.88.87.51.00</strong>. Nous étudions chaque demande avec plaisir.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-tag">Venez nous rendre visite</span>
+      <h2 class="section-title" style="color:var(--or-pale);">Nous <em>Trouver</em></h2>
+      <div class="section-rule">
+        <span style="background:var(--or)"></span><div class="r-diamond"></div><span style="background:var(--or)"></span>
+      </div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="contact-item">
+          <div class="c-icon">Adr</div>
+          <div>
+            <h4>Adresse</h4>
+            <p>À l'Arbre Vert Kirchheim<br>Kirchheim, Alsace, France</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="c-icon">Tel</div>
+          <div>
+            <h4>Téléphone</h4>
+            <a href="tel:+33388875100">03.88.87.51.00</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="c-icon">Hor</div>
+          <div>
+            <h4>Horaires</h4>
+            <p>
+              Lundi, Jeudi, Vendredi : Midi &amp; Soir<br>
+              Samedi : Soir uniquement<br>
+              Dimanche : Midi &amp; Soir<br>
+              Mardi &amp; Mercredi : Fermé
+            </p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="c-icon">FB</div>
+          <div>
+            <h4>Réseaux sociaux</h4>
+            <a href="https://facebook.com/alabrevertkirchheim" target="_blank" rel="noopener" class="fb-link">
+              𝒇 À l'Arbre Vert Kirchheim
+            </a>
+          </div>
+        </div>
+        <a href="tel:+33388875100" class="btn-primary" style="margin-top:0.5rem; display:inline-block;">Réserver par téléphone</a>
+      </div>
+      <div class="reveal" style="transition-delay:0.2s">
+        <iframe
+          class="map-frame"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=7.49,48.50,7.56,48.54&layer=mapnik&marker=48.519,7.524"
+          title="Localisation du restaurant À l'Arbre Vert à Kirchheim"
+          loading="lazy"
+        ></iframe>
+        <p style="font-family:'Crimson Pro',serif; font-size:0.85rem; color:rgba(247,242,232,0.45); margin-top:0.6rem; font-style:italic; text-align:center;">
+          Kirchheim · Alsace · À quelques kilomètres de Molsheim
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo">À l'Arbre Vert</span>
+      <p>Restaurant familial et traditionnel alsacien à Kirchheim. Saveurs authentiques, convivialité et qualité depuis des années.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#bienvenue">Accueil</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#carte">Menu & Carte</a></li>
+        <li><a href="#horaires">Horaires</a></li>
+        <li><a href="#evenements">Événements spéciaux</a></li>
+        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Informations pratiques</h4>
+      <p>
+        Tél. 03.88.87.51.00<br><br>
+        Kirchheim, Alsace<br><br>
+        Ouvert lun. jeu. ven. dim. (midi &amp; soir)<br>
+        Sam. soir · Mar. mer. fermé<br><br>
+        Tartes flambées &amp; pizzas à emporter en soirée
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024–2026 À l'Arbre Vert Kirchheim — Tous droits réservés</span>
+    <span>Restaurant traditionnel alsacien · Kirchheim</span>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
