@@ -25,7 +25,10 @@
     --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
   }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 76px;
+  }
 
   body {
     font-family: 'Crimson Pro', Georgia, serif;
@@ -60,6 +63,29 @@
     height: 68px;
   }
 
+  .skip-link {
+    position: fixed;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 1300;
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    background: var(--creme);
+    color: var(--vert);
+    transform: translateY(-160%);
+  }
+
+  .skip-link:focus { transform: translateY(0); }
+
+  :focus-visible {
+    outline: 3px solid var(--or-pale);
+    outline-offset: 3px;
+  }
+
+  .nav-toggle { display: none; }
+
   .nav-logo {
     font-family: 'Playfair Display', serif;
     font-size: 1.25rem;
@@ -70,6 +96,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    min-height: 44px;
   }
 
   .nav-logo .logo-icon {
@@ -93,6 +120,10 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
     padding: 0.5rem 1rem;
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
     transition: color 0.35s var(--ease-out);
     position: relative;
   }
@@ -118,7 +149,12 @@
     padding: 0.35rem 0.9rem;
     border-radius: 2px;
     transition: background 0.35s var(--ease-out);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
+
+  .nav-tel-short { display: none; }
 
   .nav-tel:hover { background: var(--or); color: var(--vert); }
 
@@ -126,6 +162,7 @@
   #hero {
     position: relative;
     min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -160,7 +197,7 @@
   .hero-content {
     position: relative;
     text-align: center;
-    padding: 2rem;
+    padding: 1rem;
     z-index: 2;
     animation: fadeUp 1.5s var(--ease-out) both;
   }
@@ -297,12 +334,16 @@
   }
 
   /* ─── SECTIONS GÉNÉRALES ─── */
-  section { position: relative; z-index: 1; }
+  section {
+    position: relative;
+    z-index: 1;
+    scroll-margin-top: 76px;
+  }
 
   .section-inner {
     max-width: 1140px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 clamp(1rem, 4vw, 2rem);
   }
 
   .section-header {
@@ -364,6 +405,20 @@
     gap: 0.7rem;
     color: var(--creme);
     font-size: 0.9rem;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid rgba(201, 162, 39, 0.18);
+    background: rgba(247, 242, 232, 0.035);
+    transform: translate3d(var(--info-shift-x, 0px), var(--info-shift-y, 0px), 0)
+      scale(var(--info-scale, 1));
+    opacity: var(--info-opacity, 1);
+    filter: blur(var(--info-blur, 0px));
+    transition: border-color 0.35s var(--ease-out), background 0.35s var(--ease-out);
+    will-change: transform, opacity, filter;
+  }
+
+  .info-item:hover {
+    border-color: rgba(201, 162, 39, 0.55);
+    background: rgba(247, 242, 232, 0.09);
   }
 
   .info-item .icon {
@@ -637,6 +692,7 @@
     color: var(--or);
     text-decoration: none;
     margin: 1.5rem 0;
+    min-height: 44px;
     letter-spacing: 0.05em;
     transition: color 0.35s var(--ease-out);
   }
@@ -745,45 +801,6 @@
 
   .carte-imgs img:hover { filter: sepia(0%) contrast(1.1); }
 
-  /* ─── TÉMOIGNAGE ─── */
-  #temoignage {
-    padding: 5rem 0;
-    background: var(--vert);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  #temoignage::before {
-    content: '❝';
-    position: absolute;
-    top: -0.5rem; left: 50%;
-    transform: translateX(-50%);
-    font-size: 15rem;
-    color: rgba(201, 162, 39, 0.06);
-    font-family: 'Playfair Display', serif;
-    line-height: 1;
-    pointer-events: none;
-  }
-
-  .temoignage-text {
-    font-family: 'IM Fell English', serif;
-    font-size: clamp(1.3rem, 3vw, 1.9rem);
-    font-style: italic;
-    color: var(--creme);
-    line-height: 1.65;
-    max-width: 720px;
-    margin: 0 auto 2rem;
-  }
-
-  .temoignage-author {
-    font-family: 'Crimson Pro', serif;
-    font-size: 0.9rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--or);
-  }
-
   /* ─── GALERIE ─── */
   #galerie {
     padding: 5rem 0;
@@ -825,6 +842,7 @@
   }
 
   .event-card {
+    min-width: 0;
     border: 1px solid rgba(201, 162, 39, 0.3);
     padding: 2rem;
     display: flex;
@@ -861,7 +879,10 @@
     font-size: 0.97rem;
     color: var(--texte-muted);
     line-height: 1.65;
+    overflow-wrap: anywhere;
   }
+
+  .event-card > div:last-child { min-width: 0; }
 
   /* ─── CONTACT ─── */
   #contact {
@@ -921,13 +942,20 @@
     color: rgba(247, 242, 232, 0.85);
     line-height: 1.65;
     text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  .contact-item a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
   }
 
   .contact-item a:hover { color: var(--or-pale); }
 
   .map-frame {
     width: 100%;
-    height: 400px;
+    height: clamp(240px, 42vw, 400px);
     border: 2px solid rgba(201, 162, 39, 0.3);
     filter: sepia(30%) contrast(0.9);
   }
@@ -946,6 +974,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 3rem;
     margin-bottom: 2.5rem;
+    min-width: 0;
   }
 
   .footer-brand .logo {
@@ -983,6 +1012,10 @@
     color: rgba(247, 242, 232, 0.55);
     text-decoration: none;
     transition: color 0.35s var(--ease-out);
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    min-width: 44px;
   }
   .footer-col ul li a:hover { color: var(--or-pale); }
 
@@ -1031,7 +1064,69 @@
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
-    .nav-links { display: none; }
+    nav { padding: 0 1.25rem; }
+
+    .nav-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      min-width: 48px;
+      min-height: 44px;
+      padding: 0.45rem 0.65rem;
+      border: 1px solid rgba(201, 162, 39, 0.65);
+      border-radius: 2px;
+      background: transparent;
+      color: var(--or-pale);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .nav-toggle-icon,
+    .nav-toggle-icon::before,
+    .nav-toggle-icon::after {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    .nav-toggle-icon { position: relative; }
+
+    .nav-toggle-icon::before,
+    .nav-toggle-icon::after {
+      content: '';
+      position: absolute;
+      left: 0;
+    }
+
+    .nav-toggle-icon::before { top: -6px; }
+    .nav-toggle-icon::after { top: 6px; }
+
+    .nav-links {
+      position: absolute;
+      top: calc(100% + 2px);
+      left: 0;
+      right: 0;
+      display: none;
+      flex-direction: column;
+      max-height: calc(100vh - 68px);
+      max-height: calc(100dvh - 68px);
+      overflow-y: auto;
+      padding: 0.5rem 1rem 1rem;
+      background: rgba(25, 43, 17, 0.98);
+      border-bottom: 1px solid var(--or);
+      box-shadow: 0 12px 24px rgba(20, 35, 12, 0.24);
+    }
+
+    .nav-links.is-open { display: flex; }
+
+    .nav-links a {
+      display: block;
+      min-height: 44px;
+      padding: 0.75rem 0.5rem;
+    }
+
     .bienvenue-grid,
     .horaires-wrap,
     .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -1048,6 +1143,76 @@
     .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
   }
 
+  @media (max-width: 680px) {
+    nav {
+      height: 64px;
+      gap: 0.5rem;
+      padding: 0 0.75rem;
+    }
+
+    nav.is-scrolled { height: 60px; }
+
+    .nav-logo {
+      min-width: 0;
+      gap: 0.4rem;
+      font-size: clamp(0.9rem, 4vw, 1.1rem);
+      white-space: nowrap;
+    }
+
+    .nav-logo .logo-icon {
+      width: 24px;
+      height: 24px;
+      flex: 0 0 auto;
+    }
+
+    .nav-toggle {
+      min-width: 44px;
+      padding: 0.4rem 0.5rem;
+    }
+
+    .nav-links {
+      max-height: calc(100vh - 64px);
+      max-height: calc(100dvh - 64px);
+    }
+
+    .nav-tel {
+      flex: 0 0 auto;
+      padding: 0.35rem 0.5rem;
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .nav-tel-full { display: none; }
+    .nav-tel-short { display: inline; }
+
+    #infos-bar { gap: 0.65rem; padding: 1rem; }
+    .info-item { padding: 0.55rem 0.65rem; }
+    .hero-frame { top: 78px; left: 12px; right: 12px; bottom: 20px; }
+    .hero-content { padding: 1rem; }
+    .hero-sup { letter-spacing: 0.2em; }
+    .hero-sub { font-size: 1.15rem; }
+    .section-header { margin-bottom: 2.5rem; }
+    .map-frame { height: 280px; }
+    footer { padding-right: 1rem; padding-left: 1rem; }
+    .footer-bottom { overflow-wrap: anywhere; }
+  }
+
+  @media (max-width: 380px) {
+    .nav-toggle { font-size: 0; }
+    .nav-toggle-icon { font-size: initial; }
+    .nav-tel-short { font-size: 0.75rem; }
+    .hero-title { font-size: clamp(2.4rem, 12vw, 3rem); }
+    .hero-btns { flex-direction: column; align-items: center; }
+    .hero-btns a { width: min(100%, 280px); }
+    .event-card { gap: 0.75rem; padding: 1.25rem; }
+    .event-icon-wrap { min-width: 44px; padding: 0.6rem; }
+  }
+
+  @media (hover: none) {
+    .service-overlay { transform: translateY(0); }
+    .service-desc { opacity: 1; }
+  }
+
   /* ─── TRANSITIONS AU SCROLL ─── */
   .reveal {
     opacity: 0;
@@ -1058,17 +1223,124 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* ─── ANIMATIONS DE DÉFILEMENT ─── */
+  nav {
+    transition: background 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out),
+      height 0.45s var(--ease-out), backdrop-filter 0.45s var(--ease-out);
+  }
+
+  nav.is-scrolled {
+    height: 60px;
+    background: rgba(25, 43, 17, 0.94);
+    box-shadow: 0 10px 35px rgba(20, 35, 12, 0.2);
+    backdrop-filter: blur(16px);
+  }
+
+  .nav-links a.is-active { color: var(--or-pale); }
+  .nav-links a.is-active::after { left: 1rem; right: 1rem; }
+
+  .reveal {
+    --reveal-y: 42px;
+    --reveal-scale: 0.975;
+    opacity: 0;
+    visibility: hidden;
+    filter: blur(5px);
+    transform: translate3d(0, var(--reveal-y), 0) scale(var(--reveal-scale));
+    transition:
+      opacity 0.9s var(--ease-out),
+      transform 1s var(--ease-out),
+      filter 0.9s var(--ease-out);
+    transition-delay: var(--reveal-delay, 0s);
+    will-change: opacity, transform, filter;
+  }
+
+  .reveal.reveal-from-left {
+    --reveal-y: 0px;
+    transform: translate3d(-44px, 0, 0) scale(var(--reveal-scale));
+  }
+
+  .reveal.reveal-from-right {
+    --reveal-y: 0px;
+    transform: translate3d(44px, 0, 0) scale(var(--reveal-scale));
+  }
+
+  @media (max-width: 1200px) {
+    .reveal.reveal-from-left,
+    .reveal.reveal-from-right {
+      --reveal-y: 24px;
+      transform: translate3d(0, var(--reveal-y), 0) scale(var(--reveal-scale));
+    }
+  }
+
+  .reveal.reveal-zoom {
+    --reveal-y: 12px;
+    --reveal-scale: 0.92;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    visibility: visible;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  .hero-ornament,
+  .hero-frame {
+    will-change: transform;
+    transition: transform 0.15s linear;
+  }
+
+  #hero {
+    background-position: center, center calc(50% + var(--hero-parallax, 0px));
+  }
+
+  .hero-content {
+    translate: 0 var(--hero-content-shift, 0px);
+    transition: opacity 0.15s linear;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    .reveal {
+      opacity: 1;
+      visibility: visible;
+      filter: none;
+      transform: none;
+      transition: none;
+    }
+
+    .nav-toggle-icon,
+    .nav-toggle-icon::before,
+    .nav-toggle-icon::after { transition: none; }
+  }
 </style>
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">Aller au contenu</a>
+
 <!-- NAV -->
-<nav>
+<nav aria-label="Navigation principale">
   <a href="#hero" class="nav-logo">
     <img src="logo.png" alt="Logo À l'Arbre Vert" class="logo-icon">
     À l'Arbre Vert
   </a>
-  <ul class="nav-links">
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+    <span class="nav-toggle-icon" aria-hidden="true"></span>
+    Menu
+  </button>
+  <ul class="nav-links" id="primary-navigation">
     <li><a href="#bienvenue">Accueil</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#carte">Menu</a></li>
@@ -1076,9 +1348,12 @@
     <li><a href="#galerie">Galerie</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="tel:+33388875100" class="nav-tel">03.88.87.51.00</a>
+  <a href="tel:+33388875100" class="nav-tel">
+    <span class="nav-tel-full">03.88.87.51.00</span>
+    <span class="nav-tel-short">Appeler</span>
+  </a>
 </nav>
-
+<main id="main-content">
 <!-- HERO -->
 <section id="hero">
   <div class="hero-ornament"></div>
@@ -1299,7 +1574,7 @@
     <div class="menu-grid">
       <article class="reveal menu-card" style="transition-delay:0s">
         <figure class="menu-figure">
-          <img src="menu-vrai.png" alt="Menu complet de l'Arbre Vert" class="menu-img">
+          <img src="menu-vrai.png" alt="Menu complet de l'Arbre Vert" class="menu-img" role="button" tabindex="0" aria-label="Agrandir le menu complet">
           <figcaption class="menu-label">Menu complet</figcaption>
         </figure>
         <p class="menu-copy">Plats du jour, menu à la carte, charcuteries et spécialités alsaciennes.</p>
@@ -1307,7 +1582,7 @@
 
       <article class="reveal menu-card" style="transition-delay:0.1s">
         <figure class="menu-figure">
-          <img src="menu-desserts.png" alt="Carte des desserts - Page 1" class="menu-img">
+          <img src="menu-desserts.png" alt="Carte des desserts - Page 1" class="menu-img" role="button" tabindex="0" aria-label="Agrandir la carte des desserts, page 1">
           <figcaption class="menu-label">Desserts - page 1</figcaption>
         </figure>
         <p class="menu-copy">Gourmandises maison, tartes, mousses et douceurs du moment.</p>
@@ -1315,7 +1590,7 @@
 
       <article class="reveal menu-card" style="transition-delay:0.2s">
         <figure class="menu-figure">
-          <img src="menu-desserts-2.png" alt="Carte des desserts - Page 2" class="menu-img">
+          <img src="menu-desserts-2.png" alt="Carte des desserts - Page 2" class="menu-img" role="button" tabindex="0" aria-label="Agrandir la carte des desserts, page 2">
           <figcaption class="menu-label">Desserts - page 2</figcaption>
         </figure>
         <p class="menu-copy">Pâtisseries et desserts maison, parfaits pour terminer sur une note sucrée.</p>
@@ -1323,7 +1598,7 @@
 
       <article class="reveal menu-card" style="transition-delay:0.3s">
         <figure class="menu-figure">
-          <img src="menu-desserts-3.png" alt="Carte des desserts - Page 3" class="menu-img">
+          <img src="menu-desserts-3.png" alt="Carte des desserts - Page 3" class="menu-img" role="button" tabindex="0" aria-label="Agrandir la carte des desserts, page 3">
           <figcaption class="menu-label">Desserts - page 3</figcaption>
         </figure>
         <p class="menu-copy">Découvrez toutes les douceurs de saison préparées par notre chef.</p>
@@ -1331,7 +1606,7 @@
 
       <article class="reveal menu-card" style="transition-delay:0.4s">
         <figure class="menu-figure">
-          <img src="menu-pizzas.png" alt="Tartes flambées et pizzas" class="menu-img">
+          <img src="menu-pizzas.png" alt="Tartes flambées et pizzas" class="menu-img" role="button" tabindex="0" aria-label="Agrandir la carte des tartes flambées et pizzas">
           <figcaption class="menu-label">Tartes & Pizzas</figcaption>
         </figure>
         <p class="menu-copy">Tartes flambées et pizzas maison cuites au feu de bois, à déguster sur place ou à emporter.</p>
@@ -1341,7 +1616,7 @@
 </section>
 
 <!-- LIGHTBOX MODAL -->
-<div id="lightbox" class="lightbox" aria-hidden="true">
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Menu agrandi" aria-hidden="true">
   <div class="lightbox-content">
     <button id="lightbox-close" type="button" class="lightbox-close" aria-label="Fermer la vue agrandie">✕</button>
     <img id="lightbox-img" src="" alt="Aperçu agrandi du menu" class="lightbox-img">
@@ -1489,14 +1764,16 @@
 
   .lightbox-content {
     position: relative;
-    width: min(96vw, 1100px);
+    width: min(100%, 1100px);
     max-height: 92vh;
-    padding: 0.75rem;
+    max-height: 92dvh;
+    padding: 0;
   }
 
   .lightbox-img {
     width: 100%;
     max-height: 92vh;
+    max-height: 92dvh;
     object-fit: contain;
     border-radius: 24px;
     box-shadow: 0 28px 90px rgba(0, 0, 0, 0.35);
@@ -1504,8 +1781,9 @@
 
   .lightbox-close {
     position: absolute;
-    top: -12px;
-    right: -12px;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 1;
     width: 44px;
     height: 44px;
     border-radius: 50%;
@@ -1525,11 +1803,14 @@
 
   @media (max-width: 900px) {
     .menu-grid {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
       gap: 1.2rem;
     }
   }
 
   @media (max-width: 680px) {
+    .lightbox { padding: 0.75rem; }
+
     .menu-card {
       padding: 1rem;
     }
@@ -1544,21 +1825,40 @@
 const lightbox = document.getElementById('lightbox');
 const lightboxImage = document.getElementById('lightbox-img');
 const closeLightbox = document.getElementById('lightbox-close');
+let lightboxTrigger = null;
+let lightboxFocusTimer = null;
 
-function openLightbox(src) {
+function openLightbox(src, trigger) {
+  lightboxTrigger = trigger;
   lightboxImage.src = src;
   lightbox.classList.add('active');
   lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  window.clearTimeout(lightboxFocusTimer);
+  const focusDelay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 50 : 450;
+  lightboxFocusTimer = window.setTimeout(() => {
+    if (lightbox.classList.contains('active')) closeLightbox.focus();
+  }, focusDelay);
 }
 
 function closeLightboxFn() {
+  window.clearTimeout(lightboxFocusTimer);
   lightbox.classList.remove('active');
   lightbox.setAttribute('aria-hidden', 'true');
   lightboxImage.src = '';
+  document.body.style.overflow = '';
+  if (lightboxTrigger) lightboxTrigger.focus();
+  lightboxTrigger = null;
 }
 
 document.querySelectorAll('.menu-img').forEach(img => {
-  img.addEventListener('click', () => openLightbox(img.src));
+  img.addEventListener('click', () => openLightbox(img.src, img));
+  img.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openLightbox(img.src, img);
+    }
+  });
 });
 
 closeLightbox.addEventListener('click', closeLightboxFn);
@@ -1566,24 +1866,14 @@ lightbox.addEventListener('click', e => {
   if (e.target === lightbox) closeLightboxFn();
 });
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightboxFn();
+  if (!lightbox.classList.contains('active')) return;
+  if (e.key === 'Escape') closeLightboxFn();
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    closeLightbox.focus();
+  }
 });
 </script>
-
-<!-- TÉMOIGNAGE -->
-<section id="temoignage">
-  <div class="section-inner">
-    <div class="reveal">
-      <p class="temoignage-text">
-        "Lieu chaleureux, service discret et plats qui ont du goût. Un vrai bon moment en famille, à revenir sans hésiter."
-      </p>
-      <div class="section-rule" style="justify-content:center; margin-bottom:1rem;">
-        <span style="background:var(--or)"></span><div class="r-diamond" style="background:var(--or)"></div><span style="background:var(--or)"></span>
-      </div>
-      <p class="temoignage-author">— Sophie et Marc, clients réguliers</p>
-    </div>
-  </div>
-</section>
 
 <!-- GALERIE -->
 <section id="galerie">
@@ -1718,6 +2008,8 @@ document.addEventListener('keydown', e => {
   </div>
 </section>
 
+</main>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
@@ -1755,15 +2047,146 @@ document.addEventListener('keydown', e => {
 </footer>
 
 <script>
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
+const revealTargets = document.querySelectorAll(
+  '.reveal, .galerie-grid .g-item, .contact-item'
+);
+const revealObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+    observer.unobserve(entry.target);
+  });
+}, { threshold: 0.14, rootMargin: '0px 0px -45px 0px' });
+
+revealTargets.forEach(element => {
+  if (!element.classList.contains('reveal')) element.classList.add('reveal');
+
+  const grid = element.closest('.services-grid, .menu-grid, .galerie-grid, .event-grid');
+  const staggerParent = grid || (element.matches('.contact-item') ? element.parentElement : null);
+  if (staggerParent) {
+    const siblings = Array.from(staggerParent.children);
+    const staggerIndex = siblings.indexOf(element);
+    if (staggerIndex >= 0) {
+      element.style.setProperty('--reveal-delay', `${Math.min(staggerIndex * 110, 440)}ms`);
+    }
+  } else if (element.matches('.bienvenue-text, .horaires-card, .contact-info')) {
+    element.classList.add('reveal-from-left');
+  } else if (element.matches('.bienvenue-img-wrap, .reservation-card')) {
+    element.classList.add('reveal-from-right');
+  } else if (element.matches('.section-header')) {
+    element.classList.add('reveal-zoom');
+  }
+
+  revealObserver.observe(element);
+});
+
+const navigation = document.querySelector('nav');
+const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.getElementById('primary-navigation');
+const infoBar = document.getElementById('infos-bar');
+const infoItems = Array.from(infoBar.querySelectorAll('.info-item'));
+const sectionLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+const trackedSections = sectionLinks
+  .map(link => document.querySelector(link.getAttribute('href')))
+  .filter(Boolean);
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let scrollFrame = 0;
+
+function setNavigationOpen(isOpen) {
+  navToggle.setAttribute('aria-expanded', String(isOpen));
+  navToggle.setAttribute(
+    'aria-label',
+    isOpen ? 'Fermer le menu de navigation' : 'Ouvrir le menu de navigation'
+  );
+  navLinks.classList.toggle('is-open', isOpen);
+}
+
+navToggle.addEventListener('click', () => {
+  setNavigationOpen(navToggle.getAttribute('aria-expanded') !== 'true');
+});
+
+navLinks.addEventListener('click', event => {
+  if (event.target.closest('a')) setNavigationOpen(false);
+});
+
+document.addEventListener('click', event => {
+  if (!navigation.contains(event.target)) setNavigationOpen(false);
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && navToggle.getAttribute('aria-expanded') === 'true') {
+    setNavigationOpen(false);
+    navToggle.focus();
+  }
+});
+
+const desktopQuery = window.matchMedia('(min-width: 901px)');
+const closeMenuOnDesktop = event => {
+  if (event.matches) setNavigationOpen(false);
+};
+if (desktopQuery.addEventListener) desktopQuery.addEventListener('change', closeMenuOnDesktop);
+else desktopQuery.addListener(closeMenuOnDesktop);
+
+function updateScrollEffects() {
+  navigation.classList.toggle('is-scrolled', window.scrollY > 24);
+
+  revealTargets.forEach(element => {
+    if (!element.classList.contains('visible') && element.getBoundingClientRect().bottom < 0) {
+      element.classList.add('visible');
+      revealObserver.unobserve(element);
     }
   });
-}, { threshold: 0.12 });
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  if (!reduceMotion) {
+    const infoBounds = infoBar.getBoundingClientRect();
+    const infoProgress = Math.min(
+      Math.max((window.innerHeight * 0.88 - infoBounds.top) / (window.innerHeight * 0.58), 0),
+      1
+    );
+    const spread = window.matchMedia('(max-width: 680px)').matches ? 24 : 96;
+
+    infoItems.forEach((item, index) => {
+      const position = infoItems.length > 1
+        ? 1 - (index / (infoItems.length - 1)) * 2
+        : 0;
+      const distance = position * spread * (1 - infoProgress);
+      const entrance = 1 - infoProgress;
+      item.style.setProperty('--info-shift-x', `${distance}px`);
+      item.style.setProperty('--info-shift-y', `${entrance * 14}px`);
+      item.style.setProperty('--info-scale', `${0.9 + infoProgress * 0.1}`);
+      item.style.setProperty('--info-opacity', `${0.62 + infoProgress * 0.38}`);
+      item.style.setProperty('--info-blur', `${entrance * 3}px`);
+    });
+
+    const heroProgress = Math.min(window.scrollY / Math.max(window.innerHeight, 1), 1);
+    const hero = document.getElementById('hero');
+    hero.style.setProperty('--hero-parallax', `${window.scrollY * 0.22}px`);
+    hero.querySelector('.hero-ornament').style.transform = `translate3d(0, ${window.scrollY * 0.12}px, 0)`;
+    hero.querySelector('.hero-frame').style.transform = `translate3d(0, ${window.scrollY * 0.08}px, 0)`;
+    hero.querySelector('.hero-content').style.setProperty('--hero-content-shift', `${heroProgress * 38}px`);
+    hero.querySelector('.hero-content').style.opacity = `${1 - heroProgress * 0.4}`;
+  }
+
+  const visibleSections = trackedSections.filter(section => section.getBoundingClientRect().top <= 130);
+  const activeSection = visibleSections[visibleSections.length - 1];
+
+  sectionLinks.forEach(link => {
+    const isActive = activeSection && link.getAttribute('href') === `#${activeSection.id}`;
+    link.classList.toggle('is-active', Boolean(isActive));
+    if (isActive) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  });
+
+  scrollFrame = 0;
+}
+
+function requestScrollUpdate() {
+  if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateScrollEffects);
+}
+
+window.addEventListener('scroll', requestScrollUpdate, { passive: true });
+window.addEventListener('resize', requestScrollUpdate);
+updateScrollEffects();
 </script>
 
 </body>
