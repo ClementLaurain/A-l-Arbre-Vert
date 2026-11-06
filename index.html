@@ -1066,7 +1066,11 @@
   @media (max-width: 900px) {
     nav { padding: 0 1.25rem; }
 
+    .nav-logo { order: 1; }
+
     .nav-toggle {
+      order: 2;
+      margin-left: auto;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -1106,10 +1110,11 @@
     .nav-links {
       position: absolute;
       top: calc(100% + 2px);
-      left: 0;
-      right: 0;
+      right: 1.25rem;
+      left: auto;
       display: none;
       flex-direction: column;
+      width: min(250px, calc(100vw - 2.5rem));
       max-height: calc(100vh - 68px);
       max-height: calc(100dvh - 68px);
       overflow-y: auto;
@@ -1120,6 +1125,8 @@
     }
 
     .nav-links.is-open { display: flex; }
+
+    .nav-tel { order: 3; }
 
     .nav-links a {
       display: block;
@@ -1171,6 +1178,8 @@
     }
 
     .nav-links {
+      right: 0.75rem;
+      width: min(250px, calc(100vw - 1.5rem));
       max-height: calc(100vh - 64px);
       max-height: calc(100dvh - 64px);
     }
